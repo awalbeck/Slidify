@@ -1,0 +1,71 @@
+---
+title       : Coursera Data Products Deck
+subtitle    : Describes Loan Application Shiny Project
+author      : Alan Walbeck
+job         : Data Scientist
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction - Good Loan Advisor
+
+This is a pretty nifty little app that will take a fit model and allow anyone to then predict against the model using newdata that is uploaded via the web. It contains the following functionality
+
+1. Provides "percent probability" values for the user
+2. Provides a clear "YES" or "NO" answer for each loan application (in a table form) based on the value of the "percent probability" cut-off
+3. Provides a tie back into the Loan ID
+
+--- .class #id 
+
+## Next Generation
+
+The next generation solution is already in the works. It will provide:
+
+1. The ability to "Upload" a completed file, including "percent probability" and "YES/NO" answers
+2. The ability to perform single record queries (right now, it only does it in batch mode)
+3. Email alert when completed
+
+--- .class #id 
+
+## Variable Importance
+
+This report is provided once the dataset has been trained:
+
+```r
+load("PSCmodel2.RData")
+
+varImpPlot(rf_fit, main="Variable Importance: PSC Dataset")
+title(sub=paste(format(Sys.time(), "%Y-%b-%d %H:%M:%S")))
+```
+
+![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1.png) 
+
+--- .class #id 
+
+## Model Details
+
+Below are the details for the model that was built.
+
+```r
+load("PSCmodel2.RData")
+          
+head(summary(rf_fit), 10)
+```
+
+```
+##                 Length Class    Mode       
+## call            "   5" "-none-" "call"     
+## type            "   1" "-none-" "character"
+## predicted       " 852" "factor" "numeric"  
+## votes           "1704" "-none-" "numeric"  
+## oob.times       " 852" "-none-" "numeric"  
+## classes         "   2" "-none-" "character"
+## importance      "  32" "-none-" "numeric"  
+## importanceSD    "   0" "-none-" "numeric"  
+## localImportance "   0" "-none-" "NULL"     
+## proximity       "   0" "-none-" "NULL"
+```
